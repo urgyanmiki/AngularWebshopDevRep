@@ -1,0 +1,22 @@
+<div>
+    <ng-container *ngFor="let o of order" >
+    <table id="products" >      
+        <tr>        
+            <th style="width: 150px">{{o.productname}}</th>
+        
+            <th  style="width: 60px">{{o.price | currency:'USD':true }}</th>
+        
+            <th style="width: 60px">1</th>
+            <th>
+                <input type="number" style="width: 80px;">
+            </th>
+            <th class="btn btn-danger"(click)="onDelete(p.name)" style="margin: 5px;" >Delete</th>
+        </tr>
+                  
+    </table>
+</ng-container>    
+</div>
+<div >
+<button class="btn btn-primary" routerLink="/checkout" style="margin: 5px;" > Checkout </button>
+<h5>Final Prize: </h5>
+</div>

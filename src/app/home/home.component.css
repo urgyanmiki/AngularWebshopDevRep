@@ -1,0 +1,60 @@
+.card{
+    margin-bottom: 30px;
+}
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  .fadeIn{
+      animation: fadeIn 1.5s;
+  }
+
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  .pulse{
+    cursor: pointer;
+    animation: pulse 2s;
+  }
+  h5{   
+    text-align: center;
+    margin: 25px;
+}
+.card-footer{
+  padding: 0;
+
+}
+
+.logout-button{
+  padding-left: 100%;
+}
+
+.cardbody{
+  vertical-align: bottom;
+}
+.all-product{
+  background-color: #007bff;
+  color: white;
+  }
+.add-to-cart{
+  background-color: #007bff;
+  color: white;
+}

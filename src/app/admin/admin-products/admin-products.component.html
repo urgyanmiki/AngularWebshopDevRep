@@ -1,0 +1,82 @@
+<div>
+    <a  class="btn btn-primary"  routerLink="./new">New Product</a>
+</div>
+
+
+<div>
+<ng-container *ngFor="let p of products">
+    <table id="products" >      
+        <tr>        
+            <th style="width: 150px">{{p.name}}</th>
+        
+            <th style="width: 80px">{{p.gender}}</th>
+        
+            <th style="width: 80px">{{p.type}}</th>
+        
+            <th  style="width: 60px">{{p.price | currency:'USD':true}}</th>
+        
+            <th style="width: 60px">{{p.quantity}}</th>
+        
+            <th style="width: 450px">{{p.description}}</th>
+            <th class="btn btn-primary" (click)="openModal(content, p.id)" style="margin: 5px;">Edit</th>
+            <th class="btn btn-danger"(click)="onDelete(p.id)" style="margin: 5px;" >Delete</th>
+        </tr>
+                  
+    </table>
+</ng-container>    
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Edit Product!</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #update="ngForm" (ngSubmit)="saveEditedProduct(update.vale)">
+
+            </form>
+            <div class="form-group">
+            <label for="name">Name</label>
+            <input #name="ngModel" ngModel name="name" id= "name" type="text" class="form-control" placeholder="Required for change"> 
+        </div>    
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select #gender="ngModel" ngModel name="gender" id= "gender" type="string" class="form-control" placeholder="Required for change" >
+                <option value="Women">Women</option>
+                <option value="Men">Men</option>
+            </select>
+        </div>    
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select #type="ngModel" ngModel name="type" id= "type" type="string" class="form-control" placeholder="Required for change">
+                <option value="Farmer">Farmer</option>
+                <option value="T-shirt">T-shirt</option>
+                <option value="Sneakers">Sneakers</option>
+                <option value="Jacket">Jacket</option>
+                <option value="Skirt">Skirt</option>
+            </select>
+        </div>    
+        <div>
+            <button type="button" class="btn btn-primary" (click)="filepicker.click()"> Upload Image </button>
+            <input type="file" #filepicker (change)="imagePicked($event)">
+        </div>
+        <div class="form-group">
+            <label for="imageurl">ImageURL</label>
+            <input #imageurl="ngModel" ngModel name="imageurl" id= "imageurl" type="text" class="form-control" placeholder="Required for change">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input #price="ngModel" ngModel name="price" id= "price" type="number" class="form-control" placeholder="Required for change">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input #quantity="ngModel" ngModel name="quantity" id= "quantity" type="number" class="form-control"placeholder="Required for change">
+        </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button class="btn btn-outline-dark"  type="submit">Save</button>
+        </div>
+      </ng-template>

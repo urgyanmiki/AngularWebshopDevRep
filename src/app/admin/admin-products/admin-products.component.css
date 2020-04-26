@@ -1,0 +1,13 @@
+.products{
+width: 20%;
+border-collapse: collapse;
+}
+th{
+    width: 100px;
+    border-bottom: 2px solid #dddddd;
+}
+
+
+tr:nth-child(even){background-color: skyblue;}
+
+tr:hover {background-color: azure;}

@@ -1,0 +1,13 @@
+
+input[type="file"] {
+    visibility: hidden;
+}
+button{
+    margin-bottom: 10px;
+   
+}
+h5{
+    
+    text-align: center;
+    
+}

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-3">
+
+        <div class="list-group" class="sticky-top">
+            <li id="allproduct" class="list-group-item list-group-item-action all-product"  (click)="ngOnInit()">All products</li>
+            <li id="farmer" class="list-group-item list-group-item-action" (click)="filtering('Farmer')">Farmer</li>
+            <li id="T-shirt" class="list-group-item list-group-item-action" (click)="filtering('T-shirt')" >T-shirt</li>
+            <li id="Sneakers"class="list-group-item list-group-item-action" (click)="filtering('Sneakers')">Sneakers</li>
+            <li id="Jacket" class="list-group-item list-group-item-action" (click)="filtering('Jacket')">Jacket</li>
+            <li id="Skirt" class="list-group-item list-group-item-action" (click)="filtering('Skirt')">Skirt</li>
+        </div>
+    </div>
+    <div class="col">     
+<div class="row" >
+    <ng-container *ngFor="let p of products; let i = index">
+        <div class="col">
+            <div class="card" style="width: 15rem; height: 40rem;"class="fadeIn">
+                <img class="card-img-top" [src]="p.imageurl">
+                <div class="card-body" > 
+                    <h5 class="card-title" >{{p.name}}</h5>
+                    <h6 class="card-title">{{p.price | currency:'USD':true }}</h6>
+                    <p class="card-text"> {{ p.description }}</p>
+                    <div class="card-footer">
+                        <div>
+                            <a class="add-to-cart" class="btn btn-primary btn-block"(click)=addtocart(p.name,p.price)>Add to Cart</a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(i+1) % 2 == 0" class="w-100"></div>
+    </ng-container>  
+</div>
+
+    </div>
+</div>
+
