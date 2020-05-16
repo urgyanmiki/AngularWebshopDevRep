@@ -9,9 +9,10 @@
         
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" *ngIf="!userIsAuthenticated" routerLink="/login">Login</a>
+          <a class="nav-link"  *ngIf="!userIsAuthenticated" routerLink="/login">Login</a>
         </li>
         
 
@@ -24,7 +25,7 @@
             
           </div>
         </li>
-        <button type="button" class="btn btn-danger" *ngIf="userIsAuthenticated" (click)="onLogout()">Log Out</button>
+        <button type="button"  class="btn btn-danger" *ngIf="userIsAuthenticated" (click)="onLogout()">Log Out</button>
       </ul>
       
     </div>

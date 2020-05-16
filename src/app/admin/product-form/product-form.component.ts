@@ -20,7 +20,7 @@ export class ProductFormComponent implements OnInit {
     this.service.addProduct(product);
     ///form.resetForm();
   }
-  
+  /*
   imagePicked(event: Event) {
     console.log('woow');
     const file = (event.target as HTMLInputElement).files[0];
@@ -30,11 +30,11 @@ export class ProductFormComponent implements OnInit {
     reader.onload = () => {
       this.imagePreview = reader.result as string;
     };
-    reader.readAsDataURL(file);*/
+    reader.readAsDataURL(file);
   }
-
+*/
   ngOnInit() {
-    image: new FormControl(null);
+    
   }
 
 }

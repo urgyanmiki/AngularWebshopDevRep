@@ -6,7 +6,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const checkauth = require("../backend/middleware/check-auth");
 const Order = require('./models/order');
-
+var paypal = require('paypal-rest-sdk');
+const Orders = require('./models/orders')
 const User = require('./models/user');
 const Product = require('./models/product');
 
@@ -44,25 +45,11 @@ mongoose.connect("mongodb+srv://urgyanmiki:miki98@cluster0-1evye.mongodb.net/tes
     console.log('Connection failed')
 });
 
-///----------- Product management
+///----------- Paypal
 
-app.post("/api/user",(req,res,next)=> {
-    const user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        role: req.body.role,
-        password: req.body.role,
-        city: req.body.city,
-        address: req.body.address,
-        zipcode: req.body.zipcode
-        
-    });
-   user.save();
-    console.log('done!');
-    res.status(201.).json({
-        message: 'user added succesfully'
-    })
-});
+
+
+///----------- Product management
 
 /// Creating the product
 
@@ -95,7 +82,7 @@ app.get("/api/products", (req, res, next) => {
       message: "Posts fetched successfully!",
       product: documents,    
     });
-    
+   
   });
 
 });
@@ -129,10 +116,18 @@ Product.find({type:req.params.type}).then(documents=>{
     message:"found",
     product: documents
   })
-
+  
 })
 });
-
+app.get("/api/products/find/:id",(req,res,next)=>{
+  Product.findById({_id: req.params.id}).then(document=>{
+    res.status(200).json({
+      message:"You are updating",
+      product: document
+    });
+    console.log(document);
+  })
+})
 
 ///-------------------- User APIs
 
@@ -207,6 +202,72 @@ app.post("/api/user/signup",(req,res,next)=>{
 
 /// Orders
 
+
+app.post("/api/orders/new",(req,res,next)=>{
+  const orders = new Orders({
+    userid: req.body.userid,
+    username: req.body.username,
+    products: req.body.products,
+    finalamount: req.body.finalamount
+  });
+  console.log(orders);
+  orders.save().then(createdOrders =>{
+    res.status(201).json({
+      message: "order added",
+      orderid: createdOrders.orderid,
+    })
+  }).then(result =>{
+    console.log(result);
+  })
+})
+
+
+app.get("/api/orders/:userid",(req,res,next)=>{
+  Orders.find({userid: req.params.userid}).then(documents=>{
+    res.status(200).json({
+      message: "found",
+      order: documents,
+      
+    });
+    console.log(documents)
+  });
+  });
+app.get("/api/orders/getall/all",(req,res,next)=>{
+  Orders.find().then(document=>{
+    res.status(200).json({
+      message:"All orders",
+      orders: document,
+    });
+    console.log(document)
+  });
+});
+
+
+/*
+app.get("/api/products", (req, res, next) => {
+  Product.find().then(documents => {
+    res.status(200).json({
+      message: "Posts fetched successfully!",
+      product: documents,    
+    });
+   
+  });
+
+});
+*/ 
+app.get("/api/orders/getordername/:userid",(req,res,next)=>{
+  User.findById({_id: req.params.userid}).then(documents=>{
+    res.status(200).json({
+      message:"The user",
+      user: documents
+    })
+    console.log(documents)
+  })
+  
+})
+
+/// Junk reqs
+
 app.post("/api/order/new",(req,res,next)=> {
     
   console.log('It is in the backend');
@@ -227,6 +288,8 @@ app.post("/api/order/new",(req,res,next)=> {
   });
 });
 });
+
+
 
 module.exports = app;
 
@@ -268,7 +331,7 @@ Order.findById({_id: req.params.orderid}).then(documents=>{
   console.log(documents);
 })
 })
-/*
+
 app.delete("/api/order/delete/order",(req,res,next) =>{
   Order.deleteOne({_id:"5ea4645f04ceb9027c52d3a2"}).then(result =>{
     console.log(result);
@@ -276,13 +339,14 @@ app.delete("/api/order/delete/order",(req,res,next) =>{
   res.status(200).json({message:"Order Deleted"});
 
 })
-*/
+
   
- app.delete("/api/order/delete:orderid",(req,res,next) =>{
+ app.delete("/api/order/delete/:orderid",(req,res,next) =>{
   console.log("asd")
   Order.deleteOne({_id: req.params.orderid}).then(result =>{
+    console.log('deleted');
     console.log(result);
   })
-  res.status(200).json({message: "Post deleted"})
+  res.status(200).json({message: "Order deleted"})
 })
 

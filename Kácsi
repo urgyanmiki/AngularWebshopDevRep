@@ -1,0 +1,8 @@
+Cart problem
+
+1. Objectbe gyűjtseössze az adatokat 
+2. Checkout után mehet db-be 
+3. Ezután frissíti az object tartalmát azaz üres 
+
+Tesztelés
+

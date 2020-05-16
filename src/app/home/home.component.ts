@@ -20,15 +20,8 @@ export class HomeComponent implements OnInit {
    
    }
    addtocart(productname,price){
-     console.log(this.isexist)
-    if(this.isexist){
-       console.log("it is exist")
-       this.cartService.pushToCart(productname,price);
-    }else{
-      this.cartService.addToCart(productname,price);
-      this.isexist=true;
-      console.log(this.isexist)
-    }    
+      this.cartService.AddingtoCart(productname,price);
+      //
    }
    
   
@@ -40,6 +33,7 @@ export class HomeComponent implements OnInit {
  
   ngOnInit() {
     this.homeService.getProducts();
+    
     this.prodSub = this.homeService.getProductUpdateListener().subscribe((products: Product[]) => {
       this.products = products;
     })

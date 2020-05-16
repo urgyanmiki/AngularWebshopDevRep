@@ -1,22 +1,29 @@
-<div>
-    <ng-container *ngFor="let o of order" >
-    <table id="products" >      
-        <tr>        
-            <th style="width: 150px">{{o.productname}}</th>
-        
-            <th  style="width: 60px">{{o.price | currency:'USD':true }}</th>
-        
-            <th style="width: 60px">1</th>
-            <th>
-                <input type="number" style="width: 80px;">
-            </th>
-            <th class="btn btn-danger"(click)="onDelete(p.name)" style="margin: 5px;" >Delete</th>
-        </tr>
-                  
-    </table>
-</ng-container>    
+<div *ngIf="!price">
+    <h3>You have no items</h3>
+
 </div>
-<div >
-<button class="btn btn-primary" routerLink="/checkout" style="margin: 5px;" > Checkout </button>
-<h5>Final Prize: </h5>
+
+<div *ngIf="price" >
+    <thead>
+        <tr>
+            <th style="font-size: x-large;width: 550px;">Your final amount: {{price}}</th>
+        </tr>
+    </thead>
+    <ng-container *ngFor="let product of products">
+        <table id="products">          
+                <tr>
+                    <th style="width: 550px">{{product}}</th>
+                            
+                </tr>
+    </table>   
+    </ng-container>
+       
+</div>
+
+
+<div *ngIf="price" class="row"> 
+    <button class="btn btn-primary" style="margin: 5px;" (click)=onclicktest() routerLink="/checkout"> Checkout
+    </button>
+    
+    <div><button class="btn btn-danger" (click)="onDelete()" style="margin: 5px;">Delete</button></div>
 </div>

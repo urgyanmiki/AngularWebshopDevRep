@@ -13,6 +13,8 @@ export class SignupService {
 
   signup(user: User){
     this.http.post("http://localhost:3000/api/user/signup", user).subscribe(response=>{
+      console.log(response)
+      return response;
   });
 }
   

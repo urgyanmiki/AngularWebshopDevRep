@@ -6,10 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
+
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
@@ -28,27 +27,27 @@ import { AuthIntercepter } from './login/auth-intercepter';
     AppComponent,
     BsNavbarComponent,
     HomeComponent,
-    ProductsComponent,
+    ,
     ShoppingCartComponent,
     CheckOutComponent,
-    OrderSuccessComponent,
+
     MyOrdersComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
     LoginComponent,
     ProductFormComponent,
-    SignupComponent
+    SignupComponent,
+    
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'products', component: ProductsComponent},
       {path: 'shopping-cart', component: ShoppingCartComponent},
       {path: 'check-out', component: CheckOutComponent},
-      {path: 'order-success', component: OrderSuccessComponent},
       {path: 'login', component: LoginComponent},
       {path: 'admin/products', component: AdminProductsComponent},
       {path: 'admin/orders', component: AdminOrdersComponent},
@@ -60,7 +59,8 @@ import { AuthIntercepter } from './login/auth-intercepter';
     NgbModule,
     HttpClientModule,
     CustomFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthIntercepter, multi: true}],
   bootstrap: [AppComponent]

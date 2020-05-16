@@ -38,10 +38,7 @@
             Type is required
         </div>
     
-        <div>
-            <button type="button" class="btn btn-primary" (click)="filepicker.click()"> Upload Image </button>
-            <input type="file" #filepicker (change)="imagePicked($event)">
-        </div>
+        
         <div class="form-group">
             <label for="imageurl">ImageURL</label>
             <input #imageurl="ngModel" ngModel name="imageurl" id= "imageurl" type="text" class="form-control" required>

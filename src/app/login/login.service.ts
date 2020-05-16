@@ -68,7 +68,7 @@ export class LoginService {
       const expirationDate = new Date(now.getTime()+ expiresInDuration*1000)
       const roleString =role.toString();
       console.log(expirationDate,roleString)
-      this.saveAuthData(token,expirationDate,roleString,id)
+      this.saveAuthData(token,expirationDate,roleString,id,username)
       this.isauthenticated = true;
       console.log(this.isAdmin);
       this.router.navigate(['/']);
@@ -93,11 +93,12 @@ export class LoginService {
     this.clearAuthData();
   }
 
-  private saveAuthData(token: string,expirationDate: Date,role: string,id: string){
+  private saveAuthData(token: string,expirationDate: Date,role: string,id: string,username: string){
     localStorage.setItem("token",token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("role", role);
     localStorage.setItem("id", id);
+    localStorage.setItem("username",username);
   }
 
   private clearAuthData(){
@@ -153,5 +154,9 @@ export class LoginService {
   public getUserId(){
     const userid = localStorage.getItem("id");
     return userid;
+  }
+  getUserName(){
+    const username = localStorage.getItem("username")
+    return username;
   }
 }

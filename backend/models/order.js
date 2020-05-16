@@ -8,6 +8,7 @@ const orderSchema = mongoose.Schema({
         quantity: Number
         }]
     ,
+    
     paid: {type: Boolean, default: false}
 
 });

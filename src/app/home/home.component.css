@@ -43,9 +43,6 @@
 
 }
 
-.logout-button{
-  padding-left: 100%;
-}
 
 .cardbody{
   vertical-align: bottom;
@@ -57,4 +54,14 @@
 .add-to-cart{
   background-color: #007bff;
   color: white;
+
+}
+.card-img-top { 
+  height: 350px;
+}
+.card-text{
+  height: 60px;
+}
+.card-title{
+  height: 20px;
 }

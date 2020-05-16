@@ -1,1 +1,8 @@
-<p>check-out works!</p>
+<div *ngIf="!paidFor">
+    <h1>Buy these for -${{product.price}} </h1>
+    <p>{{product.description}}</p>
+</div>
+<div *ngIf=paidFor>
+    <h1>Payment is successful</h1>
+</div>
+<div  [hidden]="paidFor" #paypal></div>

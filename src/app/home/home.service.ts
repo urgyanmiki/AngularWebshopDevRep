@@ -3,7 +3,7 @@ import { Product } from "src/app/admin/product-form/product.model";
 import { Subject } from "rxjs";
 import { map } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
-import { ProductsComponent } from '../products/products.component';
+
 import { NgbPaginationNext } from '@ng-bootstrap/ng-bootstrap';
 
 

@@ -11,7 +11,11 @@ export class ProductmanageService {
   constructor(private http: HttpClient) { }
 
   private products: Product[] = [];
-  private productsUpdated = new Subject<Product[]>();   
+  private productsUpdated = new Subject<Product[]>();  
+  
+  
+
+  
 
   getProducts() {
     console.log('it wass called');
@@ -53,6 +57,23 @@ export class ProductmanageService {
     }
     findOne(id){
       console.log(id)
-      this.http.get<{message: string, product: any}>("http://localhost:3000/api/products/find"+ id);
+      this.http.get<{message: string, product: any}>("http://localhost:3000/api/products/find/"+ id)
+      .pipe(map((productData) => {
+        console.log(productData)
+        return productData.product.map(product => {
+          return {
+            id: product._id,  
+            name: product.name,
+            gender: product.gender,
+            type: product.type,
+            imageurl: product.imageurl,
+            price: product.price,
+            quantity: product.quantity,
+            description: product.description,
+          };
+          
+        });
+        
+      }))
     }
 }

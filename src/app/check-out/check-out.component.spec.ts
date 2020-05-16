@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckOutComponent } from './check-out.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CartService } from '../shopping-cart/cart.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ElementRef } from '@angular/core';
 
 describe('CheckOutComponent', () => {
   let component: CheckOutComponent;
@@ -8,6 +12,15 @@ describe('CheckOutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      
+      ],
+      providers:[
+        CartService,
+        
+      ],
       declarations: [ CheckOutComponent ]
     })
     .compileComponents();

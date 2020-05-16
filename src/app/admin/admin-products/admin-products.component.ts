@@ -19,9 +19,11 @@ export class AdminProductsComponent implements OnInit {
     console.log(id);
   }
 
-  openModal(content,id){
+  openModal(id){
+    const content=this.productmanagement.findOne(id);
+    console.log(content);
     this.modalService.open(content,id);
-    this.productmanagement.findOne(id);
+    
     console.log(id);
     //updatebyid(form)
   }

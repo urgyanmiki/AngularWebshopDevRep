@@ -1,1 +1,19 @@
-<p>my-orders works!</p>
+<h3>Your Orders</h3>
+
+<div>
+    <ng-container *ngFor="let order of orders">
+        <table id="orders" >      
+            <tr>   
+                
+                
+                
+                <th style="width: 700px">{{order.products}}</th>
+                      
+                <th  style="width: 60px">{{order.finalamount | currency:'USD':true}}</th>
+            
+        
+            </tr>
+                      
+        </table>
+    </ng-container>    
+        </div>
