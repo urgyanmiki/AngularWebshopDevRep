@@ -37,17 +37,5 @@ export class OrderService {
 getOrderUpdateListener(){
   return this.orderUpdated.asObservable();
 }
-/*
-getUserName(userid){
-  this.http.get<{message: string, user: any}>("http://localhost:3000/api/orders/getordername/"+ userid).
-  pipe(map((userData)=>{
-    return userData.user.map(users=>{
-      return{
-        username: users.username
-      }
-      console.log(userData)
-    });
-  })) 
-}
-*/
+
 }

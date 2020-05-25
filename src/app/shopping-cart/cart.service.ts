@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Order } from "src/app/models/order.model";
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../login/login.service';
@@ -8,6 +8,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CartService {
+  getFinalAmount(price: number) {
+    throw new Error("Method not implemented.");
+  }
   private updatedOrder = new Subject<Order[]>();
   finalPrice: any
   newprice: any
@@ -71,25 +74,22 @@ export class CartService {
           _id: orders.orderid,
           userid: orders.userid,
           products: orders.products,
-          finalamount: orders.finalamount
+          finalamount: orders.finalamount,
+          username: orders.username
         }
 
       })
     })).subscribe(transformedOrders=>{
       this.orders=transformedOrders;
       this.orderUpdated.next([...this.orders]);
-    })   
+
+    })
+    return this.orders;   
   }
 
   getOrdersAsListener(){
     return this.orderUpdated.asObservable();
   }
-
-  getMyOrderAsListener(){
-    
-  }
-
-
 
   AddingtoCart(productname: any, price: number) {
     const ordercheck = this.getProductName();
@@ -97,18 +97,17 @@ export class CartService {
     if (ordercheck != null) {
       this.modifyProductName(productname);
       this.modifyFinalAmount(price);
-      this.modifyEachPrice(price);
+      
 
     } else {
       this.setProductName(productname);
       this.setFinalAmount(price);
-      this.setEachprice(price)
-
+      
     }
 
   }
-
-  saveOrder(){
+  
+  saveOrder() {
     const userid=this.loginservice.getUserId();
     const username =this.loginservice.getUserName();
     console.log(userid);
@@ -116,30 +115,15 @@ export class CartService {
     const pnames = this.getProductName();
     
     const order = {userid: userid, finalamount: famount, products: pnames,username:username }
-    this.http.post("http://localhost:3000/api/orders/new",order).subscribe(response =>{
+    return this.http.post<any>("http://localhost:3000/api/orders/new",order).subscribe(response =>{
       console.log(response);
+      
     })
     this.deleteProductName();
     this.deleteFinalAmount();
   }
 
-  //Each price management
-
-  setEachprice(price){
-    localStorage.setItem("Price",price);
-  }
-  getEachPrice(){
-    const price = localStorage.getItem("Price");
-    return price;
-  }
-  modifyEachPrice(price){
-    var prices=this.getEachPrice();
-    prices=prices+','+price;
-    localStorage.setItem("Price",prices);
-  }
-  deleteEachPrice(){
-    localStorage.removeItem("Price");
-  }
+  
 
   //Product name management
 
@@ -217,7 +201,7 @@ export class CartService {
   destroyOrder() {
     const orderid = this.getOrderId()
     console.log(orderid)
-    this.http.delete("http://localhost:3000/api/order/delete/" + orderid)
+    this.http.delete("http://localhost:3000/api/orders/delete/" + orderid)
     this.deleteOrderId();
     this.deleteFinalAmount();
     this.deleteProductName();

@@ -29,11 +29,7 @@ export class ShoppingCartComponent implements OnInit {
     this.ngOnInit();
   }
 
-  onclicktest() {
-    this.price = this.cartService.getFinalprice()
-    console.log("activated")
-    console.log(this.price)
-  }
+ 
 
   manipulateNames(){
     const temp =this.cartService.getProductName()
@@ -41,18 +37,13 @@ export class ShoppingCartComponent implements OnInit {
     console.log(this.product);
     return this.product;
   }
-  manipualtePrices(){
-    const temp=this.cartService.getEachPrice()
-    this.eachprice=temp.split(",")
-    console.log(this.eachprice);
-    return this.eachprice;
-  }
+  
 
   ngOnInit() {
     this.price=this.cartService.getFinalprice();
     if(this.price){
       this.products=this.manipulateNames();
-    this.eachprice=this.manipualtePrices();
+    
     }
     
   }

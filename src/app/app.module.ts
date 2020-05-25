@@ -27,7 +27,7 @@ import { AuthIntercepter } from './login/auth-intercepter';
     AppComponent,
     BsNavbarComponent,
     HomeComponent,
-    ,
+    
     ShoppingCartComponent,
     CheckOutComponent,
 

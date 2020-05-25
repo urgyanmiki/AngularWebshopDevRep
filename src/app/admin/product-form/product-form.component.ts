@@ -18,24 +18,11 @@ export class ProductFormComponent implements OnInit {
   save(product){
     console.log(product);
     this.service.addProduct(product);
-    ///form.resetForm();
+    
   }
-  /*
-  imagePicked(event: Event) {
-    console.log('woow');
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({image: file});
-    this.form.get("image").updateValueAndValidity();
-    /*const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
-*/
+ 
   ngOnInit() {
     
   }
 
 }
-///name,gender,type,price,quantity,description

@@ -96,17 +96,6 @@ app.delete("/api/products/delete:id",(req,res,next) =>{
   res.status(200).json({message: "Post deleted"})
 })
 
-/// findone product
-
-/*app.get("/api/products/find:id",(req,res,next)=>{
-  Product.find({_id:req.params.id}).then(result=>{
-    res.status(200).json({
-      message: "Product found",
-      product: result,
-    })
-    console.log(result);
-  });
-});*/
 
 /// findby category
 
@@ -243,18 +232,6 @@ app.get("/api/orders/getall/all",(req,res,next)=>{
 });
 
 
-/*
-app.get("/api/products", (req, res, next) => {
-  Product.find().then(documents => {
-    res.status(200).json({
-      message: "Posts fetched successfully!",
-      product: documents,    
-    });
-   
-  });
-
-});
-*/ 
 app.get("/api/orders/getordername/:userid",(req,res,next)=>{
   User.findById({_id: req.params.userid}).then(documents=>{
     res.status(200).json({
@@ -266,84 +243,13 @@ app.get("/api/orders/getordername/:userid",(req,res,next)=>{
   
 })
 
-/// Junk reqs
-
-app.post("/api/order/new",(req,res,next)=> {
-    
-  console.log('It is in the backend');
-  const order = new Order({
-  userid: req.body.userid,
-  products: {
-    productname: req.body.productname,
-    price: req.body.price,
-    quantity: '1',    
-  },
-  paid: req.body.paid
-  
-  });
-  order.save().then(createdOrder => {
-  res.status(201).json({
-    message: "order added successfully",
-    orderid: createdOrder.id
-  });
-});
-});
-
-
-
 module.exports = app;
 
-app.put("/api/order/push:orderid",(req,res,next)=>{
-  Order.findByIdAndUpdate(
-    {_id: req.body.orderid},
-    {$addToSet: 
-        {products:{
-                    productname: req.body.productname,
-                    price: req.body.price
-                  }
-        }
-    })
-    .then(result=>{
-      console.log(result);
-    res.status(200).json({
-      message:"Update successful!"
-    })
-  })
-});
-
-app.get("/api/order/getall", (req, res, next) => {
-  Order.find().then(documents => {
-    res.status(200).json({
-      message: "Posts fetched successfully!",
-      product: documents,    
-    });
-    console.log(documents);
-  });
-
-});
-
-app.get("/api/order/:orderid",(req,res,next)=>{
-Order.findById({_id: req.params.orderid}).then(documents=>{
-  res.status(200).json({
-    message: "found",
-    order: documents
-  })
-  console.log(documents);
-})
-})
-
-app.delete("/api/order/delete/order",(req,res,next) =>{
-  Order.deleteOne({_id:"5ea4645f04ceb9027c52d3a2"}).then(result =>{
-    console.log(result);
-  })
-  res.status(200).json({message:"Order Deleted"});
-
-})
 
   
- app.delete("/api/order/delete/:orderid",(req,res,next) =>{
+ app.delete("/api/orders/delete/:orderid",(req,res,next) =>{
   console.log("asd")
-  Order.deleteOne({_id: req.params.orderid}).then(result =>{
+  Orders.deleteOne({_id: req.params.orderid}).then(result =>{
     console.log('deleted');
     console.log(result);
   })

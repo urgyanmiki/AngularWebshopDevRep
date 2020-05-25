@@ -12,7 +12,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [HomeService],
+      providers: [HomeService,HomeComponent],
       declarations: [ HomeComponent ]
     })
     .compileComponents();
@@ -23,6 +23,16 @@ describe('HomeComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  it('should add to cart',()=>{
+    const homecomp: HomeComponent=TestBed.get(HomeComponent);
+    let productname='Skirt';
+    let price=12
+    homecomp.addtocart(productname,price)
+    
+    expect(localStorage.getItem('Productnames') ).toBe(productname)
+    
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();

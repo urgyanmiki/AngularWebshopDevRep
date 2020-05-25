@@ -21,9 +21,8 @@ export class NewproductService {
         const id = responseData.id;
         product.id = id;
         this.products.push(product);
-        /*this.productUpdated.next([...this.product]);*/
+        
       });   
-    console.log('almost there');
     console.log(product.name);
     }
 

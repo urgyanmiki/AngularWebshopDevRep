@@ -27,10 +27,7 @@ export class AdminProductsComponent implements OnInit {
     console.log(id);
     //updatebyid(form)
   }
-  saveEditedProduct(product){
-    
-    console.log("called");
-  }
+
 
   ngOnInit() {
     this.productmanagement.getProducts();
